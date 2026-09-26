@@ -18,7 +18,7 @@ class Page:
 
 
 def paginate(items, page=1, per_page=12):
-    total_pages = len(items) // per_page + 1
+    total_pages = (len(items) + per_page - 1) // per_page
     page = max(1, page)
     start = (page - 1) * per_page
     return Page(items=items[start : start + per_page], number=page, total_pages=total_pages)
