@@ -1,14 +1,18 @@
 """Small text helpers used by the catalog and the templates."""
+import re
+import unicodedata
 
 
 def slugify(text):
     """Turn a title into a URL slug, e.g. "The Time Machine" -> "the-time-machine"."""
-    return text.strip().lower().replace(" ", "-")
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    text = re.sub(r"[^\w\s-]", "", text).strip().lower()
+    return re.sub(r"[-\s]+", "-", text)
 
 
 def format_price(value):
     """Format a price in US dollars for display."""
-    return f"${value}"
+    return f"${value:.2f}"
 
 
 def truncate(text, length=80):

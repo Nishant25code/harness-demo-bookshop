@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Search · Bookshop{% endblock %}
 {% block content %}
-<h1>Results for "{{ query|safe }}"</h1>
+<h1>Results for "{{ query }}"</h1>
 {% if results %}
 <ul class="books">
   {% for book in results %}
