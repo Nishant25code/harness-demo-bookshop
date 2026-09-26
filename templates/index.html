@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>All books</h1>
+<nav class="sort">
+  Sort by:
+  <a href="/?sort=title">Title</a> ·
+  <a href="/?sort=price_asc">Price: low to high</a> ·
+  <a href="/?sort=price_desc">Price: high to low</a> ·
+  <a href="/?sort=year">Year</a>
+</nav>
+<ul class="books">
+  {% for book in page.items %}
+  <li class="book">
+    <a class="book-title" href="/books/{{ book.slug }}">{{ book.title }}</a>
+    <span class="author">{{ book.author }}</span>
+    <span class="genre">{{ book.genre }}</span>
+    <span class="price">{{ book.price|price }}</span>
+  </li>
+  {% else %}
+  <li class="empty">No books to show.</li>
+  {% endfor %}
+</ul>
+<p class="pager">
+  {% if page.has_prev %}<a href="/?sort={{ sort }}&page={{ page.number - 1 }}">Previous</a>{% endif %}
+  Page {{ page.number }} of {{ page.total_pages }}
+  {% if page.has_next %}<a href="/?sort={{ sort }}&page={{ page.number + 1 }}">Next</a>{% endif %}
+</p>
+{% endblock %}

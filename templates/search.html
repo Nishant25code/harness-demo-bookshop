@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Search · Bookshop{% endblock %}
+{% block content %}
+<h1>Results for "{{ query|safe }}"</h1>
+{% if results %}
+<ul class="books">
+  {% for book in results %}
+  <li class="book">
+    <a class="book-title" href="/books/{{ book.slug }}">{{ book.title }}</a>
+    <span class="author">{{ book.author }}</span>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No books found.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Cart · Bookshop{% endblock %}
+{% block content %}
+<h1>Your cart</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+{% if lines %}
+<table class="cart">
+  <tr><th>Book</th><th>Quantity</th><th>Price</th><th></th></tr>
+  {% for book, quantity, line_total in lines %}
+  <tr>
+    <td>{{ book.title }}</td>
+    <td>{{ quantity }} ×</td>
+    <td>{{ line_total|price }}</td>
+    <td><form method="post" action="/cart/remove/{{ book.id }}"><button>Remove one</button></form></td>
+  </tr>
+  {% endfor %}
+</table>
+<p class="subtotal">Subtotal: {{ subtotal|price }}</p>
+{% if cart.code %}<p class="discount">Discount ({{ cart.code }}): -{{ discount|price }}</p>{% endif %}
+<p class="total">Total: {{ total|price }}</p>
+<form method="post" action="/cart/code">
+  <input name="code" placeholder="Discount code">
+  <button>Apply</button>
+</form>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

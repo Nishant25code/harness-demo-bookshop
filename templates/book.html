@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }} · Bookshop{% endblock %}
+{% block content %}
+<article class="book-detail">
+  <h1>{{ book.title }}</h1>
+  <p class="author">by {{ book.author }} ({{ book.year }})</p>
+  <p class="genre">Genre: {{ book.genre }}</p>
+  <p class="price">{{ book.price|price }}</p>
+  <p class="rating">{{ stars(rating) }} {{ rating }} / 5 from {{ book.reviews|length }} reviews</p>
+  <form method="post" action="/cart/add/{{ book.id }}"><button>Add to cart</button></form>
+
+  <h2>Reviews</h2>
+  <ul class="reviews">
+    {% for review in book.reviews %}
+    <li>{{ stars(review.rating) }} {{ review.text }}</li>
+    {% endfor %}
+  </ul>
+</article>
+{% endblock %}

@@ -1,0 +1,15 @@
+body { font-family: system-ui, sans-serif; margin: 0; color: #222; background: #fafaf7; }
+header { display: flex; gap: 1rem; align-items: center; padding: 0.75rem 1.5rem; background: #2d3a4a; }
+header a { color: #fff; text-decoration: none; }
+.brand { font-weight: 700; font-size: 1.2rem; }
+.search { flex: 1; display: flex; gap: 0.5rem; }
+.search input { flex: 1; padding: 0.4rem; }
+main { max-width: 860px; margin: 0 auto; padding: 1.5rem; }
+.books { list-style: none; padding: 0; }
+.book { display: grid; grid-template-columns: 2fr 1.5fr 1fr auto; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid #e5e5e0; }
+.genre { color: #6b6b6b; font-size: 0.9rem; }
+.price { font-variant-numeric: tabular-nums; }
+.pager { text-align: center; }
+.cart td, .cart th { padding: 0.3rem 0.8rem; text-align: left; }
+.error { color: #b00020; }
+footer { text-align: center; color: #888; padding: 2rem; font-size: 0.85rem; }
