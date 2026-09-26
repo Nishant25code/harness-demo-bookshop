@@ -3,6 +3,8 @@
 
 def average_rating(reviews):
     """Average star rating of the reviews, rounded to one decimal place."""
+    if not reviews:
+        return 0.0
     total = sum(review["rating"] for review in reviews)
     return round(total / len(reviews), 1)
 
