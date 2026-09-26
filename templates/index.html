@@ -17,7 +17,11 @@
     <span class="price">{{ book.price|price }}</span>
   </li>
   {% else %}
-  <li class="empty">No books to show.</li>
+    {% if genre %}
+      <li class="empty">No books in this genre.</li>
+    {% else %}
+      <li class="empty">No books to show.</li>
+    {% endif %}
   {% endfor %}
 </ul>
 <p class="pager">
