@@ -46,7 +46,7 @@ SORT_OPTIONS = {
     # name: (key function, reverse)
     "title": (lambda book: book.title.lower(), False),
     "price_asc": (lambda book: book.price, False),
-    "price_desc": (lambda book: book.price, False),
+    "price_desc": (lambda book: book.price, True),
     "year": (lambda book: book.year, False),
 }
 
