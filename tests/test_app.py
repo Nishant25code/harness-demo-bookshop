@@ -5,6 +5,10 @@ def test_home_page(client):
     assert b"All books" in response.data
 
 
+def test_out_of_range_catalog_page_is_404(client):
+    assert client.get("/?page=3").status_code == 404
+
+
 def test_book_page(client):
     response = client.get("/books/dracula")
     assert response.status_code == 200

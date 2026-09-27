@@ -50,6 +50,8 @@ def create_app(books=None):
         else:
             books_to_sort = catalog
         page = paginate(sort_books(books_to_sort, sort), page_number, PER_PAGE)
+        if page.number > max(1, page.total_pages):
+            abort(404)
         return render_template("index.html", page=page, sort=sort, genre=genre)
 
     @app.route("/books/<slug>")
