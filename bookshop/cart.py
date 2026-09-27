@@ -53,7 +53,10 @@ class Cart:
         """Amount taken off the subtotal by the applied discount code."""
         if not self.code:
             return 0.0
-        return float(DISCOUNT_CODES[self.code])
+        subtotal = self.subtotal(books_by_id)
+        percentage = DISCOUNT_CODES[self.code]
+        discount_amount = round(subtotal * percentage / 100, 2)
+        return min(discount_amount, subtotal)
 
     def total(self, books_by_id):
         return round(self.subtotal(books_by_id) - self.discount(books_by_id), 2)
