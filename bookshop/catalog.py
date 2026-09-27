@@ -51,6 +51,14 @@ SORT_OPTIONS = {
 }
 
 
+def filter_by_genre(books, genre):
+    """Return books matching the given genre (case-insensitive)."""
+    if not genre:
+        return books
+    genre_lower = genre.lower()
+    return [book for book in books if book.genre.lower() == genre_lower]
+
+
 def sort_books(books, sort="title"):
     key, reverse = SORT_OPTIONS.get(sort, SORT_OPTIONS["title"])
     return sorted(books, key=key, reverse=reverse)

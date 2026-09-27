@@ -4,7 +4,7 @@ import os
 from flask import Flask, abort, redirect, render_template, request, session, url_for
 
 from bookshop.cart import Cart
-from bookshop.catalog import find_by_slug, load_books, search, sort_books
+from bookshop.catalog import find_by_slug, load_books, search, sort_books, filter_by_genre
 from bookshop.pagination import paginate
 from bookshop.reviews import average_rating, stars
 from bookshop.text import format_price
@@ -42,9 +42,11 @@ def create_app(books=None):
     @app.route("/")
     def index():
         sort = request.args.get("sort", "title")
+        genre = request.args.get("genre", "")
         page_number = request.args.get("page", 1, type=int)
-        page = paginate(sort_books(catalog, sort), page_number, PER_PAGE)
-        return render_template("index.html", page=page, sort=sort)
+        filtered = filter_by_genre(catalog, genre)
+        page = paginate(sort_books(filtered, sort), page_number, PER_PAGE)
+        return render_template("index.html", page=page, sort=sort, genre=genre)
 
     @app.route("/books/<slug>")
     def book_detail(slug):
