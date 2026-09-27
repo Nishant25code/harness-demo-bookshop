@@ -27,6 +27,8 @@ class Cart:
         """Remove one copy of a book from the cart."""
         if book_id in self.items:
             self.items[book_id] -= 1
+            if self.items[book_id] <= 0:
+                del self.items[book_id]
 
     def count(self):
         return sum(self.items.values())
