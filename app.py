@@ -2,6 +2,7 @@
 import os
 
 from flask import Flask, abort, redirect, render_template, request, session, url_for
+from markupsafe import escape
 
 from bookshop.cart import Cart
 from bookshop.catalog import find_by_slug, load_books, search, sort_books
@@ -57,7 +58,7 @@ def create_app(books=None):
     def search_page():
         query = request.args.get("q", "")
         results = search(catalog, query) if query else []
-        return render_template("search.html", query=query, results=results)
+        return render_template("search.html", query=escape(query), results=results)
 
     @app.route("/cart")
     def cart_page():
