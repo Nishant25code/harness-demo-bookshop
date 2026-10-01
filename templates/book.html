@@ -6,7 +6,11 @@
   <p class="author">by {{ book.author }} ({{ book.year }})</p>
   <p class="genre">Genre: {{ book.genre }}</p>
   <p class="price">{{ book.price|price }}</p>
+  {% if rating is none %}
+  <p class="rating">No reviews yet</p>
+  {% else %}
   <p class="rating">{{ stars(rating) }} {{ rating }} / 5 from {{ book.reviews|length }} reviews</p>
+  {% endif %}
   <form method="post" action="/cart/add/{{ book.id }}"><button>Add to cart</button></form>
 
   <h2>Reviews</h2>
