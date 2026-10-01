@@ -8,7 +8,7 @@ def slugify(text):
 
 def format_price(value):
     """Format a price in US dollars for display."""
-    return f"${value}"
+    return f"${value:,.2f}"
 
 
 def truncate(text, length=80):
