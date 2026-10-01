@@ -1,9 +1,16 @@
 """Small text helpers used by the catalog and the templates."""
+import re
+import unicodedata
 
 
 def slugify(text):
-    """Turn a title into a URL slug, e.g. "The Time Machine" -> "the-time-machine"."""
-    return text.strip().lower().replace(" ", "-")
+    """Turn a title into a URL slug, e.g. "The Time Machine" -> "the-time-machine".
+
+    Slugs contain only lowercase ASCII letters, digits and single hyphens.
+    """
+    text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    text = re.sub(r"[^a-z0-9]+", "-", text.lower().replace("'", ""))
+    return text.strip("-")
 
 
 def format_price(value):
