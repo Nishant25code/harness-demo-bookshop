@@ -2,7 +2,13 @@
 
 
 def average_rating(reviews):
-    """Average star rating of the reviews, rounded to one decimal place."""
+    """Average star rating of the reviews, rounded to one decimal place.
+
+    Returns None when there are no reviews, so callers can show
+    "No reviews yet" instead of crashing on a division by zero.
+    """
+    if not reviews:
+        return None
     total = sum(review["rating"] for review in reviews)
     return round(total / len(reviews), 1)
 
