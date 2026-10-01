@@ -33,8 +33,13 @@ def find_by_slug(books, slug):
 
 
 def search(books, query):
-    """Books whose title or author contains the query."""
-    return [book for book in books if query in book.title or query in book.author]
+    """Books whose title or author contains the query (case-insensitive)."""
+    needle = query.lower()
+    return [
+        book
+        for book in books
+        if needle in book.title.lower() or needle in book.author.lower()
+    ]
 
 
 SORT_OPTIONS = {
