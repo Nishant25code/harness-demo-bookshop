@@ -44,6 +44,8 @@ def create_app(books=None):
         sort = request.args.get("sort", "title")
         page_number = request.args.get("page", 1, type=int)
         page = paginate(sort_books(catalog, sort), page_number, PER_PAGE)
+        if page.number > page.total_pages:
+            abort(404)
         return render_template("index.html", page=page, sort=sort)
 
     @app.route("/books/<slug>")
