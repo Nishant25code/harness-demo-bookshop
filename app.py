@@ -42,9 +42,18 @@ def create_app(books=None):
     @app.route("/")
     def index():
         sort = request.args.get("sort", "title")
+        genre = request.args.get("genre")
         page_number = request.args.get("page", 1, type=int)
-        page = paginate(sort_books(catalog, sort), page_number, PER_PAGE)
-        return render_template("index.html", page=page, sort=sort)
+        books = sort_books(catalog, sort)
+        if genre:
+            books = [book for book in books if book.genre.lower() == genre.lower()]
+        page = paginate(books, page_number, PER_PAGE)
+        html = render_template("index.html", page=page, sort=sort, genre=genre)
+        if genre and not books:
+            html = html.replace(
+                "</body>", '<p class="empty-genre">No books in this genre.</p></body>'
+            )
+        return html
 
     @app.route("/books/<slug>")
     def book_detail(slug):
